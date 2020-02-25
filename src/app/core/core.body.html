@@ -1,3 +1,66 @@
-<div>
-  <h4>this is body</h4>
+<div class="content">
+  <div class="row col-12">
+    <div class="col-md-6 border-right">
+      <div class="row">
+        Webcam Feed
+      </div>
+
+      <div class="row">
+        <webcam [width]="620" [height]="520" [trigger]="triggerObservable"
+                (imageCapture)="handleImage($event)"></webcam>
+
+        <div>
+          <button class="btn btn-light" (click)="triggerSnapshot()">Capture</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div *ngIf="getCapturedImage()">
+        <div class="row ml-0">
+          Preview
+        </div>
+        <div>
+          <img [src]="getCapturedImage()" [width]="200"/>
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <div class="row ml-0">
+          Results
+        </div>
+        <div class="mt-2" s>
+          <ul class="list-group">
+            <li *ngFor="let face of detectedFaces" class="list-group-item">
+              <div class="row">
+                <div class="col-8">
+                  <h6>Face ID: {{face.faceId}}</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Gender: {{face.faceAttributes.gender}}</h6>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <p>Anger: {{face.faceAttributes.emotion.anger}}</p>
+                  <p>Contempt: {{face.faceAttributes.emotion.contempt}}</p>
+                  <p>Disgust: {{face.faceAttributes.emotion.disgust}}</p>
+                </div>
+                <div class="col-4">
+                  <p>Fear: {{face.faceAttributes.emotion.fear}}</p>
+                  <p>Happiness: {{face.faceAttributes.emotion.happiness}}</p>
+                  <p>Neutral: {{face.faceAttributes.emotion.neutral}}</p>
+                </div>
+                <div class="col-4">
+                  <p>Sadness: {{face.faceAttributes.emotion.sadness}}</p>
+                  <p>Surprise: {{face.faceAttributes.emotion.surprise}}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
