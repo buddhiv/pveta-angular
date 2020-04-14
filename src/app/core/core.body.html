@@ -2,35 +2,32 @@
   <div class="row col-12">
     <div class="col-md-6 border-right">
       <div class="row">
-        Webcam Feed
-      </div>
+        <div class="col-md-6">
+          Webcam Feed
 
-      <div class="row">
-        <webcam [width]="620" [height]="520" [trigger]="triggerObservable"
-                (imageCapture)="handleImage($event)"></webcam>
-
-        <div>
-          <button class="btn btn-light" (click)="triggerSnapshot()">Capture</button>
+          <webcam [width]="280" [trigger]="triggerObservable" (imageCapture)="handleImage($event)">
+          </webcam>
         </div>
 
-      </div>
-    </div>
-
-    <div class="col-md-6">
-      <div *ngIf="getCapturedImage()">
-        <div class="row ml-0">
-          Preview
-        </div>
-        <div>
-          <img [src]="getCapturedImage()" [width]="200"/>
+        <div class="col-md-6">
+          <div *ngIf="getCapturedImage()">
+            Preview
+            <div>
+              <img [src]="getCapturedImage()" [width]="280" />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="mt-2">
-        <div class="row ml-0">
-          Results
-        </div>
-        <div class="mt-2" s>
+      <div class="row col-12">
+        <button class="btn btn-primary" (click)="triggerSnapshot()">Capture</button>
+      </div>
+
+      <div *ngIf="detectedFaces.length > 0" class="mt-4">
+
+        Results
+
+        <div class="mt-2">
           <ul class="list-group">
             <li *ngFor="let face of detectedFaces" class="list-group-item">
               <div class="row">
@@ -61,6 +58,11 @@
           </ul>
         </div>
       </div>
+    </div>
+
+    <div class="col-md-6">
+      Suggestions
+      <div id="iframeContainer"></div>
     </div>
   </div>
 </div>
